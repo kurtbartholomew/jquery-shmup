@@ -1,8 +1,8 @@
-var BlinkyDancer = function(top, left, timeBetweenSteps){
+function BlinkyDancer(top, left, timeBetweenSteps){
   // debugger
   Dancer.apply(this, arguments);
 
-};
+}
 
 BlinkyDancer.prototype = Object.create(Dancer.prototype);
 BlinkyDancer.prototype.constructor = BlinkyDancer;
