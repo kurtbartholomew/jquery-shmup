@@ -1,6 +1,8 @@
 function Player(top, left, timeBetweenSteps){
   // debugger
   Dancer.apply(this, arguments);
+  this.height = 50;
+  this.width = 50;
   this.$node.attr('id','player');
   $('body').on('keydown',function(event){
     if(event.keyCode === 3){
@@ -24,7 +26,6 @@ Player.prototype.step = function(){
 };
 
 Player.prototype.shootBullet = function(){
-  console.log(this);
   new Bullet($(this.$node).position().top,$(this.$node).position().left);
 };
 

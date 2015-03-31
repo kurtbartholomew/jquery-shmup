@@ -1,5 +1,4 @@
 function Bullet(initialTop,initialLeft,speed){
-  console.log("hello");
   this.speed = speed || 10;
   this.$node = $('<div class="bullet"></div>');
   window.bullets.push(this);
@@ -11,7 +10,6 @@ function Bullet(initialTop,initialLeft,speed){
 }
 
 Bullet.prototype.fly = function(){
-  //console.log(this.$node);
   var currentPos = $(this.$node).position().top;
   $(this.$node).css({top: (currentPos - 15) + 'px'});
   if(+currentPos < 0) {

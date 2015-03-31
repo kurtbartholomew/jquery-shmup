@@ -49,16 +49,16 @@ $(document).ready(function(){
       var currentLeft = jQplayer.position().left;
       // Move down by 50px
 
-      if(event.keyCode === 40 && currentTop < $('body').height()-50){
+      if(event.keyCode === 40 && currentTop < $('body').height()-window.player.height){
         jQplayer.css({top:currentTop+10+'px'});
       }
-      if(event.keyCode === 38 && currentTop > 50){
+      if(event.keyCode === 38 && currentTop > window.player.height){
         jQplayer.css({top:currentTop-10+'px'});
       }
-      if(event.keyCode === 39 && currentLeft < $('body').width() - 50){
+      if(event.keyCode === 39 && currentLeft < $('body').width() - window.player.width){
         jQplayer.css({left:currentLeft+10+'px'});
       }
-      if(event.keyCode === 37 && currentLeft > 20){
+      if(event.keyCode === 37 && currentLeft > (window.player.width/4)){
         jQplayer.css({left:currentLeft-10+'px'});
       }
       if(event.keyCode === 32){
