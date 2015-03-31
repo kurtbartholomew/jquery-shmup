@@ -6,6 +6,7 @@ var Dancer = function(top, left, timeBetweenSteps){
 
   // use jQuery to create an HTML <span> tag
   this.$node = $('<span class="dancer"></span>');
+  this.$node.on('mouseover', this.explode);
 
   this.step();
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
@@ -31,9 +32,15 @@ Dancer.prototype.setPosition = function(top, left){
   this.$node.css(styleSettings);
 };
 
-// Dancer.prototype.lineUp = function(){
-//   var styleSettings = {
-
-//   };
-// this.$node.css(styleSettings);
-// };
+Dancer.prototype.explode = function(){
+  var top = $(this).css('top');
+  var left = $(this).css('left');
+  var topnum = +top.slice(0, top.length - 3) - 100;
+  topnum = topnum+'px';
+  var leftnum = +left.slice(0, left.length - 3) - 100;
+  leftnum = leftnum+'px';
+  $(this).replaceWith('<img id="explode" style="top:'+topnum+'; left:'+leftnum+';position:absolute;" src=\'explode.gif\'></img>');
+  setTimeout(function(){
+    $('#explode').remove();
+  },800);
+};
