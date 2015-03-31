@@ -1,6 +1,7 @@
 $(document).ready(function(){
   window.dancers = [];
   window.bullets = [];
+  window.player;
 
   $('.addDancerButton').on('click', function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -42,23 +43,27 @@ $(document).ready(function(){
   });
 
   $('body').on('keydown',function(event){
-    console.log('hello');
-    var player = $('#player');
-    var currentTop = player.position().top;
-    var currentLeft = player.position().left;
-    // Move down by 50px
+    if(window.player) {
+      var jQplayer = $('#player');
+      var currentTop = jQplayer.position().top;
+      var currentLeft = jQplayer.position().left;
+      // Move down by 50px
 
-    if(event.keyCode === 40){
-      player.css({top:currentTop+10+'px'});
-    }
-    if(event.keyCode === 38){
-      player.css({top:currentTop-10+'px'});
-    }
-    if(event.keyCode === 39){
-      player.css({left:currentLeft+10+'px'});
-    }
-    if(event.keyCode === 37){
-      player.css({left:currentLeft-10+'px'});
+      if(event.keyCode === 40 && currentTop < $('body').height()-50){
+        jQplayer.css({top:currentTop+10+'px'});
+      }
+      if(event.keyCode === 38 && currentTop > 50){
+        jQplayer.css({top:currentTop-10+'px'});
+      }
+      if(event.keyCode === 39 && currentLeft < $('body').width() - 50){
+        jQplayer.css({left:currentLeft+10+'px'});
+      }
+      if(event.keyCode === 37 && currentLeft > 20){
+        jQplayer.css({left:currentLeft-10+'px'});
+      }
+      if(event.keyCode === 32){
+        window.player.shootBullet();
+      }
     }
   });
 });

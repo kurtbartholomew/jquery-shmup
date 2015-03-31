@@ -2,14 +2,15 @@ function Player(top, left, timeBetweenSteps){
   // debugger
   Dancer.apply(this, arguments);
   this.$node.attr('id','player');
-  this.$node.on('keydown',function(event){
+  $('body').on('keydown',function(event){
     if(event.keyCode === 3){
 
     }
   });
 
   this.$node.off('mouseover', this.explode);
-  this.$node.on('mouseover', this.shootBullet);
+  this.$node.on('click', this.shootBullet);
+  window.player = this;
 }
 
 Player.prototype = Object.create(Dancer.prototype);
@@ -23,7 +24,8 @@ Player.prototype.step = function(){
 };
 
 Player.prototype.shootBullet = function(){
-  new Bullet();
+  console.log(this);
+  new Bullet($(this.$node).position().top,$(this.$node).position().left);
 };
 
 // Player.prototype.moveLeft = function(){
