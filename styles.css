@@ -5,9 +5,8 @@ body{
   margin: 0px;
   background-color:#444;
   font-size: 18px;
-  background: url('background.jpg') repeat-x center center fixed;
-  background-size: 100%;
   /* DEATHLY IMPORTANT: MUST PLAY DISCO INFERNO */
+  position:relative;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
@@ -19,6 +18,8 @@ body, a:link, a:visited, a:active{
 .topbar{
   height:32px;
   background-color: #555;
+  position:fixed;
+  left:25%;
 }
 .title{
   background-color: #777;
@@ -35,7 +36,7 @@ body, a:link, a:visited, a:active{
 .dancer{
   border:10px solid red;
   border-radius:10px;
-  position:absolute;
+  position:fixed;
 }
 
 .giantdancer{
@@ -44,3 +45,30 @@ body, a:link, a:visited, a:active{
   -webkit-transition: border 1s;
   transition: border 1s;
 }
+
+.scroll {
+  height: 100%;
+  width: 100%;
+  background: url('background2.jpg');
+  background-size: 100%;
+
+}
+
+#player {
+  border:20px solid blue;
+  border-radius:5px;
+  position:fixed;
+}
+
+.bullet {
+  height: 5px;
+  width: 5px;
+  background-color: yellow;
+}
+
+
+
+
+
+
+
