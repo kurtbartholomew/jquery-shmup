@@ -34,6 +34,8 @@ body, a:link, a:visited, a:active{
   padding:5px 12px;
 }
 .dancer{
+  height: 10px;
+  width: 10px;
   border:10px solid red;
   border-radius:10px;
   position:fixed;
@@ -55,9 +57,14 @@ body, a:link, a:visited, a:active{
 }
 
 #player {
-  border:20px solid blue;
-  border-radius:5px;
+ /* border:20px solid blue;
+  border-radius:5px;*/
+  height: 80px;
+  width: 100px;
+  background: url('spaceship3.png');
+  background-size: 100%;
   position:fixed;
+  border:none;
 }
 
 .bullet {
@@ -67,7 +74,14 @@ body, a:link, a:visited, a:active{
   position: fixed;
 }
 
-
+#fredstar {
+  height: 280px;
+  width: 200px;
+  background: url('fredstar.png');
+  background-size: 100%;
+  position:fixed;
+  border:none;
+}
 
 
 

@@ -12,8 +12,9 @@ function Bullet(initialTop,initialLeft,speed){
 Bullet.prototype.fly = function(){
   var currentPos = $(this.$node).position().top;
   $(this.$node).css({top: (currentPos - 15) + 'px'});
-  if(+currentPos < 0) {
+  if(+currentPos < 0 || this.used === true) {
     clearInterval(this.bulletTrajectory);
     $(this.$node).remove();
+    window.bullets.splice(window.bullets.indexOf(this),1);
   }
 };

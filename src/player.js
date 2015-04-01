@@ -1,28 +1,30 @@
 function Player(top, left, timeBetweenSteps){
+  if(!window.player){
   // debugger
-  Dancer.apply(this, arguments);
-  this.height = 50;
-  this.width = 50;
-  this.$node.attr('id','player');
-  $('body').on('keydown',function(event){
-    if(event.keyCode === 3){
-
-    }
-  });
-
-  this.$node.off('mouseover', this.explode);
-  this.$node.on('click', this.shootBullet);
-  window.player = this;
+    Dancer.apply(this, [$('body').height()*0.9,$('body').width()/2]);
+    this.height = 100;
+    this.width = 100;
+    this.$node.attr('id','player');
+    this.timeBetweenSteps = 100;
+    this.$node.off('mouseover', this.explode);
+    this.$node.on('click', this.shootBullet);
+    window.player = this;
+  }
 }
 
 Player.prototype = Object.create(Dancer.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.step = function(){
   // call the old version of step at the beginning of any call to this new version of step
-  //Dancer.prototype.step.call(this);
+  Dancer.prototype.step.call(this);
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
+
+  // if(this.killed) {
+  //   window.pixelMoveDistance = 0;
+  //   window.player = null;
+  // }
 };
 
 Player.prototype.shootBullet = function(){

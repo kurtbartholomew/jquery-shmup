@@ -8,7 +8,7 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.$node = $('<span class="dancer"></span>');
   // this.$node.data('top',this.top);
   // this.$node.data('left',this.left);
-  this.$node.on('mouseover', this.explode);
+  this.$node.on('click', this.explode);
 
   this.step();
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
@@ -19,8 +19,18 @@ var Dancer = function(top, left, timeBetweenSteps){
 Dancer.prototype.step = function(){
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
+  this.yPos = this.$node.position().top;
+  this.xPos = this.$node.position().left;
+  if(this.yPos > $('body').height()) {
+    this.killed = true;
+  }
 
-  setTimeout(this.step.bind(this), this.timeBetweenSteps);
+  if(this.killed === true){
+    this.$node.remove();
+    window.dancers.splice(window.dancers.indexOf(this),1);
+  }
+
+  if(!this.killed) { setTimeout(this.step.bind(this), this.timeBetweenSteps); }
 };
 
 Dancer.prototype.setPosition = function(top, left){

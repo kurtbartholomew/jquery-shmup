@@ -2,6 +2,7 @@ $(document).ready(function(){
   window.dancers = [];
   window.bullets = [];
   window.player;
+  window.fred;
 
   $('.addDancerButton').on('click', function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -28,7 +29,7 @@ $(document).ready(function(){
       // Math.random()*0.333333 * $('body').height() + ($('body').height()*0.5),
       // Math.random()* 0.9 * $('body').width() + ($('body').height()*0.1),
       // Math.random() * 1000
-      Math.random() * $('body').height(),
+      -40,
       Math.random() * $('body').width(),
       Math.random() * 1000
     );
@@ -37,10 +38,14 @@ $(document).ready(function(){
   });
 
   $('.lineUpButton').on('click', function(event){
-    for(var i = 0; i < window.dancers.length; i++){
-      window.dancers[i].setPosition(i * 50, 0);
+    for(var i = 1; i < window.dancers.length; i++){
+      if(window.dancers[i] !== window.fred){
+        window.dancers[i].setPosition(i * 50, 0);
+      }
     }
   });
+
+  $('#start').on('click', function(){ $(this).hide(); });
 
   $('body').on('keydown',function(event){
     if(window.player) {
@@ -75,11 +80,12 @@ var current = 0;
 
 // set the direction
 var direction = 'v';
+var pixelMoveDistance = 1;
 
 function bgscroll(){
 
   // 1 pixel row at a time
-  current += 1;
+  current += pixelMoveDistance;
   //console.log('Hello!');
 
   // move the background with backgrond-position css properties
@@ -89,3 +95,46 @@ function bgscroll(){
 
 //Calls the scrolling function repeatedly
 setInterval(bgscroll, scrollSpeed);
+
+//Create interval function to check for collisions
+
+function checkCollision(){
+  var xDifference;
+  var yDifference;
+  for(var i = 0; i < window.bullets.length; i++){
+    for(var n = 0; n < window.dancers.length; n++){
+      xDifference = $(window.bullets[i].$node).position().left - $(window.dancers[n].$node).position().left;
+      yDifference = $(window.bullets[i].$node).position().top - $(window.dancers[n].$node).position().top;
+      if(Math.abs(xDifference) < 20 && Math.abs(yDifference) < 20){
+        window.bullets[i].used = true;
+        window.dancers[n].killed = true;
+        if(window.dancers[n] === window.fred && window.fred.durability > 0) {
+          window.fred.killed = false;
+          window.fred.durability--;
+          console.log("Fred has been wounded");
+        }
+        break;
+      }
+    }
+  }
+  if(window.player){
+    for(var s = 1; s < window.dancers.length; s++){
+      xDifference = window.player.xPos - window.dancers[s].$node.position().left;
+      yDifference = window.player.yPos - window.dancers[s].$node.position().top;
+      if(Math.abs(xDifference) < 40 && Math.abs(yDifference) < 20){
+        console.log("Player should be dead");
+        window.player.killed = true;
+        break;
+      }
+    }
+  }
+}
+
+setInterval(checkCollision, 10);
+
+
+
+
+
+
+
